@@ -4,6 +4,7 @@
   max-width: 1400px;
   min-height: 100vh;
   padding: 80px;
+  box-sizing: border-box;
 }
 
 .userContainer {

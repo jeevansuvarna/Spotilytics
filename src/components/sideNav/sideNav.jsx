@@ -1,6 +1,6 @@
-import styles from './sideNav.module.css';
-import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import styles from "./sideNav.module.css";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   Account,
   Playlist,
@@ -8,74 +8,75 @@ import {
   Spotify,
   TopArtist,
   TopTrack,
-} from '../icons/icons';
+} from "../icons/icons";
 
 const SideNav = () => {
-  const navigate = useNavigate();
-  const [active, setActive] = useState('profile');
+  const { pathname } = useLocation();
+  const [active, setActive] = useState("profile");
+
   useEffect(() => {
-    const path = window.location.href;
-    if (path === '/top-artist') setActive('topArtist');
-    else if (path === '/top-track') setActive('topTrack');
-    else if (path === '/recent') setActive('recent');
-    else if (path === '/paylist') setActive('paylist');
-  }, [navigate]);
+    if (pathname === "/top-artist") setActive("topArtist");
+    else if (pathname === "/top-track") setActive("topTrack");
+    else if (pathname === "/recent") setActive("recent");
+    else if (pathname === "/paylist") setActive("paylist");
+  }, [pathname]);
+
   return (
     <nav className={styles.navContainer}>
       <div className={styles.logoImg}>
-        <a href="">
+        <Link to="">
           <Spotify />
-        </a>
+        </Link>
       </div>
       <ul className={styles.navList}>
         <li className={styles.iconList}>
-          <a href="/" className={active === 'profile' && styles.active}>
+          <Link to="/" className={active === "profile" && styles.active}>
             <div className={styles.navLogo}>
-              <Account color={active === 'profile' ? '#fff' : '#9b9b9b'} />
+              <Account color={active === "profile" ? "#fff" : "#9b9b9b"} />
             </div>
             <p>Profile</p>
-          </a>
+          </Link>
         </li>
         <li className={styles.iconList}>
-          <a
-            href="/topArtist"
-            className={active === 'topArtist' && styles.active}
+          <Link
+            to="/top-artist"
+            className={active === "topArtist" && styles.active}
           >
             <div className={styles.navLogo}>
-              <TopArtist color={active === 'topArtist' ? '#FFF' : '#9b9b9b'} />
+              <TopArtist color={active === "topArtist" ? "#FFF" : "#9b9b9b"} />
             </div>
             <p>Top Artist</p>
-          </a>
+          </Link>
         </li>
         <li className={styles.iconList}>
-          <a
-            href="/topArtist"
-            className={active === 'topTrack' && styles.active}
+          <Link
+            to="/topArtist"
+            className={active === "topTrack" && styles.active}
           >
             <div className={styles.navLogo}>
-              <TopTrack color={active === 'topTrack' ? '#FFF' : '#9b9b9b'} />
+              <TopTrack color={active === "topTrack" ? "#FFF" : "#9b9b9b"} />
             </div>
 
             <p>Top Tracks</p>
-          </a>
+          </Link>
         </li>
         <li className={styles.iconList}>
-          <a href="/recent" className={active === 'recent' && styles.active}>
+          <Link to="/recent" className={active === "recent" && styles.active}>
             <div className={styles.navLogo}>
-              <Recent color={active === 'recent' ? '#FFF' : '#9b9b9b'} />
+              <Recent color={active === "recent" ? "#FFF" : "#9b9b9b"} />
             </div>
 
             <p>Recents</p>
-          </a>
+          </Link>
         </li>
         <li className={styles.iconList}>
-          <a href="/paylist" className={active === 'paylist' && styles.active}>
+          <Link to="/paylist" className={active === "paylist" && styles.active}>
             <div className={styles.navLogo}>
-              <Playlist color={active === 'paylist' ? '#FFF' : '#9b9b9b'} />
+              <Playlist color={active === "paylist" ? "#FFF" : "#9b9b9b"} />
             </div>
 
             <p>paylist</p>
-          </a>
+          </Link>
         </li>
       </ul>
       <div></div>

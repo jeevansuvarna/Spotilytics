@@ -1,0 +1,82 @@
+.mainContainer {
+  width: 100%;
+  margin: 0px auto;
+  max-width: 1400px;
+  min-height: 100vh;
+  padding: 80px;
+  box-sizing: border-box;
+}
+
+.headerContainer {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  color: #fff;
+}
+
+.filter {
+  display: flex;
+  margin-right: -11px;
+}
+
+.filterButton {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
+  display: inline-block;
+  color: rgb(179, 179, 179);
+  font-family: "Circular Std", system, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 50px;
+  border: 0px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: 0.25scubic-bezier(0.3, 0, 0.4, 1);
+}
+.filterButton div {
+  padding-bottom: 2px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.filterButton .active {
+  border-bottom: 1px solid rgb(255, 255, 255);
+  font-weight: 500;
+  color: #fff;
+}
+.topArtistList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 50px;
+}
+.topArtistItem {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+}
+.topArtistItem img {
+  border-radius: 100%;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+.artistName {
+  margin: 20px 0px;
+  border-bottom: 1px solid transparent;
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  transition: 0.25scubic-bezier(0.3, 0, 0.4, 1);
+  cursor: pointer;
+}
+.artistName:hover {
+  border-bottom: 1px solid white;
+}
