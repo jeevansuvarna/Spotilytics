@@ -1,0 +1,38 @@
+:root {
+  --background-color : #181818;
+  --primary-color: #fffff;
+  --secondary-color: #2ecc71;
+}
+
+body {
+  background-color: var(--background-color);
+  margin: auto;
+  font-family: 'Circular Std';
+  box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Circular Std Bold';
+  font-weight: bold;
+  
+}
+
+
+
+/* App.css */
+
+/* Regular Font */
+@font-face {
+  font-family: 'Circular Std';
+  src: url('/src/fonts/CircularStd-Black.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Bold Font */
+@font-face {
+  font-family: 'Circular Std Bold';
+  src: url('/src/fonts/CircularStd-Bold.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
