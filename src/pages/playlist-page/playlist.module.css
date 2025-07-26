@@ -1,0 +1,41 @@
+.mainContainer {
+  width: 100%;
+  margin: 0px auto;
+  max-width: 1400px;
+  min-height: 100vh;
+  padding: 80px;
+  box-sizing: border-box;
+  display: flex;
+  gap: 24px;
+}
+.leftContainer {
+  width: 30%;
+  text-align: center;
+  min-width: 200px;
+}
+.leftContainer .playlistImage {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+  width: 100%;
+  max-width: 300px;
+  margin: 0px auto;
+}
+.playlistTitle {
+  font-weight: 700;
+  font-size: 28px;
+  margin-top: 20px;
+  color: white;
+  margin-bottom: 12px;
+}
+.playlistOwner,
+.description {
+  margin-top: 12px;
+  text-decoration: none;
+  font-size: 14px;
+  color: rgb(155, 155, 155);
+}
+.recommendation {
+  font-size: 10px;
+  width: 40%;
+  display: block;
+  margin: 10px auto;
+}

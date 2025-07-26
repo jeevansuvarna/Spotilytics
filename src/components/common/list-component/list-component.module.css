@@ -1,0 +1,63 @@
+.trackItem {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: inherit;
+  transition: 0.25s cubic-bezier(0.3, 0, 0.4, 1);
+  cursor: pointer;
+}
+
+.trackImg {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  min-width: 50px;
+  margin-right: 20px;
+
+  img {
+    width: 100%;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+}
+
+.trackInfo {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  gap: 10px;
+  color: rgb(155, 155, 155);
+  font-size: 14px;
+
+  .trackDetails {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 1px;
+  }
+
+  .trackName {
+    margin-bottom: 5px;
+    border-bottom: 1px solid transparent;
+    color: white;
+  }
+
+  .trackArtist {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 1px;
+    color: rgb(155, 155, 155);
+    font-size: 14px;
+    margin-top: 3px;
+  }
+}
+
+.trackImg:hover {
+  background-color: black;
+  opacity: 50%;
+}

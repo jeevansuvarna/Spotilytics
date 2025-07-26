@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTopArtist } from '../../services/spotify-service';
-import styles from './top-artist.module.css';
+import { fetchTopArtist, fetchTopTrack } from '../../services/spotify-service';
+import styles from './top-track.module.css';
+import ListComponent from '../../components/common/list-component/list-component';
 import GraphLoader from '../../components/common/loader/loader';
 
-const TopArtist = () => {
-  const [topArtist, setTopArtist] = useState([]);
+const TopTrack = () => {
+  const [topTracks, setTopTracks] = useState([]);
   const [active, setActive] = useState('long_term');
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchTopArtistList = (time_range = 'long_term') => {
+  const fetchTopTrackList = (time_range = 'long_term') => {
     setActive(time_range);
     setIsLoading(true);
-    fetchTopArtist(time_range)
+    fetchTopTrack(time_range)
       .then((res) => {
-        setTopArtist(res);
+        setTopTracks(res?.items);
       })
       .finally(() => {
         setIsLoading(false);
       });
   };
   useEffect(() => {
-    fetchTopArtistList();
+    fetchTopTrackList();
   }, []);
 
   if (isLoading) return <GraphLoader />;
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.headerContainer}>
@@ -31,7 +33,7 @@ const TopArtist = () => {
         <div className={styles.filter}>
           <button
             className={styles.filterButton}
-            onClick={() => fetchTopArtistList('long_term')}
+            onClick={() => fetchTopTrackList('long_term')}
           >
             <div className={active == 'long_term' && styles.active}>
               All Time
@@ -39,7 +41,7 @@ const TopArtist = () => {
           </button>
           <button
             className={styles.filterButton}
-            onClick={() => fetchTopArtistList('medium_term')}
+            onClick={() => fetchTopTrackList('medium_term')}
           >
             <div className={active == 'medium_term' && styles.active}>
               Last 6 Months
@@ -47,7 +49,7 @@ const TopArtist = () => {
           </button>
           <button
             className={styles.filterButton}
-            onClick={() => fetchTopArtistList('short_term')}
+            onClick={() => fetchTopTrackList('short_term')}
           >
             <div className={active == 'short_term' && styles.active}>
               Last 4 Weeks
@@ -55,20 +57,11 @@ const TopArtist = () => {
           </button>
         </div>
       </div>
-      <div className={styles.topArtistList}>
-        {topArtist?.items?.map((item) => {
-          return (
-            <div className={styles.topArtistItem}>
-              <img src={item?.images?.[0]?.url} alt='' />
-              <a href={item?.href} className={styles.artistName}>
-                {item?.name}
-              </a>
-            </div>
-          );
-        })}
+      <div className={styles.trackContainer}>
+        <ListComponent lists={topTracks} limit={50} />
       </div>
     </div>
   );
 };
 
-export default TopArtist;
+export default TopTrack;

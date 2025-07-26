@@ -7,30 +7,45 @@ import {
 } from '../../services/spotify-service';
 import TopArtist from '../../components/topArtist/topArtist';
 import TopTrack from '../../components/topTrack/topTrack';
+import GraphLoader from '../../components/common/loader/loader';
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
   const [userPlaylist, setUserPlaylist] = useState({});
   const [followingData, setFollowing] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchUserProfile().then((res) => {
-      setUserData(res);
-    });
-    fetchPaylist().then((res) => {
-      console.log(res, 'play');
-      setUserPlaylist(res);
-    });
-    fetchFollowing().then((res) => {
-      setFollowing(res);
-    });
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const [user, playlist, following] = await Promise.all([
+          fetchUserProfile(),
+          fetchPaylist(),
+          fetchFollowing(),
+        ]);
+
+        setUserData(user);
+        setUserPlaylist(playlist);
+        setFollowing(following);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Optionally, set error state here
+      } finally {
+        setIsLoading(false);
+        console.log('Data fetch completed');
+      }
+    };
+
+    fetchData();
   }, []);
 
+  if (isLoading) return <GraphLoader />;
   return (
     <div className={styles.mainContainer}>
       <div className={styles.userContainer}>
         <div className={styles.userImg}>
-          <img src={userData?.images?.[0]?.url} alt="" />
+          <img src={userData?.images?.[0]?.url} alt='' />
         </div>
         <div className={styles.userName}>{userData?.display_name}</div>
         <div className={styles.userStats}>

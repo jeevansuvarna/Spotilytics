@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: auto;
+}
+
+.bars {
+  display: flex;
+  gap: 6px;
+}
+
+.bar {
+  width: 6px;
+  height: 40px;
+  background-color: rgb(64, 64, 64); /* Or any primary theme color */
+  animation: bounce 1.2s infinite ease-in-out;
+  border-radius: 3px;
+}
+
+.bar1 {
+  animation-delay: -0.4s;
+}
+.bar2 {
+  animation-delay: -0.3s;
+}
+.bar3 {
+  animation-delay: -0.2s;
+}
+.bar4 {
+  animation-delay: -0.1s;
+}
+.bar5 {
+  animation-delay: 0s;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

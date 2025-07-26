@@ -1,13 +1,21 @@
-// import Home from './pages/login/dashboard/dashboard';
-import Login from "./pages/login/login";
-// import Router from "./routes/router";
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from 'react';
+import Login from './pages/login/login';
+import { Route, Routes } from 'react-router-dom';
+import useHooks from './hooks/userHooks';
+import Dashboard from './pages/dashboard/dashboard';
+
+const Component = () => {
+  const { isUserLoggedIn } = useHooks();
+
+  if (!isUserLoggedIn) return <Login />;
+  return <Dashboard />;
+};
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/*" element={<Login />} />
+        <Route path='/*' element={<Component />} />
       </Routes>
     </>
   );

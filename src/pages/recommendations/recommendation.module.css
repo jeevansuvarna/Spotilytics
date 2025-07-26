@@ -1,0 +1,17 @@
+.mainContainer {
+  width: 100%;
+  margin: 0px auto;
+  max-width: 1400px;
+  min-height: 100vh;
+  padding: 80px;
+  box-sizing: border-box;
+}
+
+.headerContainer {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  color: #fff;
+}
