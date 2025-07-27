@@ -39,7 +39,7 @@
 }
 
 .userName:hover {
-  color: #1FB954;
+  color: #1fb954;
 }
 
 .userStats {
@@ -89,4 +89,14 @@
   gap: 70px;
   width: 100%;
   margin-top: 100px;
+}
+
+@media (max-width: 48em) {
+  .mainContainer {
+    padding: 30px 25px;
+  }
+  .subContainer {
+    display: block;
+    margin-top: 70px;
+  }
 }

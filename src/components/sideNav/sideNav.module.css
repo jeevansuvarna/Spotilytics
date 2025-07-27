@@ -1,17 +1,17 @@
-.sideBarContainer{
+.sideBarContainer {
   width: 100px;
   background-color: #000;
   height: 100vh;
 }
 
-.logoImg{
+.logoImg {
   height: 50px;
   width: 50px;
   display: flex;
   margin-top: 30px;
 }
 
-.navContainer{
+.navContainer {
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
   display: flex;
   -webkit-box-pack: justify;
@@ -28,11 +28,11 @@
   text-align: center;
   z-index: 99;
 }
-.iconList{
+.iconList {
   color: rgb(155, 155, 155);
   font-size: 11px;
   list-style: none;
-  a{
+  a {
     display: block;
     padding: 15px 0px;
     border-left: 5px solid transparent;
@@ -40,7 +40,7 @@
     height: 100%;
     text-decoration: none;
   }
-  .active{
+  .active {
     color: rgb(255, 255, 255);
     background-color: rgb(24, 24, 24);
     border-left: 5px solid rgb(30, 215, 96);
@@ -48,7 +48,7 @@
       color: white !important;
     }
   }
-  p{
+  p {
     text-decoration: none;
     color: #9b9b9b;
     margin: 0px;
@@ -61,10 +61,61 @@
   padding: 0;
   width: 100%;
 }
-.navLogo{
+.navLogo {
   height: 17px;
   width: 17px;
   margin: auto;
   margin-bottom: 7px;
 }
 
+@media (max-width: 48em) {
+  .navContainer {
+    top: auto;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    min-height: 70px;
+    height: 70px;
+    flex-direction: row;
+  }
+  .logoImg {
+    display: none;
+  }
+  .navList {
+    flex-direction: row;
+    align-items: flex-end;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .iconList {
+    flex-direction: row;
+    align-items: flex-end;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    a {
+      gap: 6px;
+    }
+    .active {
+      border-top: 5px solid rgb(30, 215, 96);
+      border-left: unset;
+    }
+  }
+  .iconList a {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 0px;
+    border-left: 0px;
+    border-top: 3px solid transparent;
+  }
+  .navLogo {
+    margin: 0;
+  }
+}

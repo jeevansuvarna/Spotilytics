@@ -1,5 +1,4 @@
 .trackList {
-
   .trackHeading {
     display: flex;
     -webkit-box-pack: justify;
@@ -61,5 +60,13 @@
     text-decoration: none;
     color: white;
     font-weight: 400;
+  }
+}
+
+@media (max-width: 48em) {
+  .trackList {
+    ul {
+      padding: 0px;
+    }
   }
 }

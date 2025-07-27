@@ -19,6 +19,7 @@ const SideNav = () => {
     else if (pathname === '/top-track') setActive('topTrack');
     else if (pathname === '/recent') setActive('recent');
     else if (pathname === '/paylist') setActive('paylist');
+    else setActive('profile');
   }, [pathname]);
 
   return (

@@ -15,3 +15,12 @@
   align-items: center;
   color: #fff;
 }
+@media (max-width: 48em) {
+  .mainContainer {
+    padding: 30px 25px;
+  }
+  .headerContainer {
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+}

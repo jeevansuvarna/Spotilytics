@@ -20,8 +20,8 @@
 }
 .artist {
   color: rgb(179, 179, 179);
-  font-weight: 700;
-  text-align: left !important;
+  font-weight: 400;
+  text-align: left;
 }
 .year {
   color: rgb(155, 155, 155);
@@ -59,4 +59,44 @@
   color: rgb(179, 179, 179);
   font-size: 12px;
   margin-bottom: 0px;
+}
+
+@media (max-width: 48em) {
+  .mainContainer {
+    padding: 30px 25px;
+    flex-direction: column;
+  }
+  .topContainer {
+    flex-direction: column;
+  }
+  .headerContainer {
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  .topContainer img {
+    max-width: 200px;
+    margin: auto;
+  }
+  .details {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .title {
+    font-size: 30px;
+    margin: 7px 0;
+  }
+  .year {
+    margin: 7px 0;
+  }
+  .artist {
+    font-size: 20px;
+    text-align: center;
+    margin: 7px 0;
+  }
+  .playbtn {
+    font-size: 12px;
+  }
+  .bottomContainer {
+    margin: 15px auto;
+  }
 }

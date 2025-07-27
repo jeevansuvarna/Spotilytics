@@ -54,6 +54,11 @@ const PlaylistPage = () => {
         ) : (
           <></>
         )}
+        <a href={playlistDetail?.external_urls?.spotify} target='_blank'>
+          <div className={`${styles.playbtn} spotify-button`}>
+            Open On Spotify
+          </div>
+        </a>
         {/* <Link to={`/recommendations/${playlistDetail?.id}`}>
           <div className={`${styles.recommendation} spotify-button`}>
             Get Recommendation

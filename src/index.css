@@ -7,13 +7,12 @@
 body {
   background-color: var(--background-color);
   margin: auto;
-  font-family: 'Circular Std';
+  font-family: 'Nunito', sans-serif;
   box-sizing: border-box;
 }
 
 h1 {
-  font-family: 'Circular Std Bold';
-  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
 }
 
 a {
@@ -22,7 +21,7 @@ a {
 
 /* App.css */
 
-/* Regular Font */
+/* Regular Font
 @font-face {
   font-family: 'Circular Std';
   src: url('/src/fonts/CircularStd-Black.woff2') format('woff2');
@@ -31,12 +30,12 @@ a {
 }
 
 /* Bold Font */
-@font-face {
+/* @font-face {
   font-family: 'Circular Std Bold';
   src: url('/src/fonts/CircularStd-Bold.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
-}
+} */
 .spotify-button {
   color: white;
   display: inline-block;

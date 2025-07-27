@@ -49,10 +49,32 @@
   color: #fff;
   transition: 0.25scubic-bezier(0.3, 0, 0.4, 1);
   cursor: pointer;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tracks {
   margin-top: 10px;
   font-size: 16px;
   font-weight: 400;
   color: rgb(155, 155, 155);
+}
+
+@media (max-width: 48em) {
+  .mainContainer {
+    padding: 30px 25px;
+  }
+  .headerContainer {
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+  .playlistList {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .playlistItems img {
+    width: 150px;
+    height: 150px;
+  }
 }

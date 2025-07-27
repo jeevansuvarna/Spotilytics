@@ -36,11 +36,12 @@ const Track = () => {
       <div className={styles.topContainer}>
         <img src={trackDetail?.album?.images?.[1]?.url} alt='' />
         <div className={styles.details}>
-          <p className={styles.title}>{trackDetail?.album?.name}</p>
-          <p className={styles.artist}>{artist.join(',')}</p>
-          <p className={styles.year}>
+          <h1 className={styles.title}>{trackDetail?.album?.name}</h1>
+          <h2 className={styles.artist}>{artist.join(',')}</h2>
+          <h3 className={styles.year}>
+            {trackDetail?.album?.name} -{' '}
             {trackDetail?.album?.release_date?.split('-')[0]}
-          </p>
+          </h3>
           <a
             href={trackDetail?.external_urls?.spotify}
             target='_blank'

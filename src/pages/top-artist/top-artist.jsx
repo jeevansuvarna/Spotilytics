@@ -60,9 +60,15 @@ const TopArtist = () => {
           return (
             <div className={styles.topArtistItem}>
               <img src={item?.images?.[0]?.url} alt='' />
-              <a href={item?.href} className={styles.artistName}>
+              <a
+                href={item?.external_urls?.spotify}
+                className={styles.artistName}
+                target='_blank'
+              >
                 {item?.name}
               </a>
+              <div className={styles.popTitle}>Popularity</div>
+              <div className={styles.popularity}>{item?.popularity} %</div>
             </div>
           );
         })}

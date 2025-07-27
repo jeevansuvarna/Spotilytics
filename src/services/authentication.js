@@ -1,14 +1,8 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://api.spotify.com/v1';
-const CLIENT_ID = 'c39454715c1c4cba9bf7a7672f42a628';
-const REFRESH_TOKEN_URL = 'https://accounts.spotify.com/api/token';
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
-const api = axios.create({
-  baseURL: BASE_URL,
-});
-
-const REDIRECT_URI = 'http://localhost:3000/'; // Change to match your app URL
 const SCOPES = [
   'user-read-private',
   'user-read-email',
@@ -26,90 +20,96 @@ const SCOPES = [
   'user-read-recently-played',
 ].join(' ');
 
+const BASE_URL = 'https://api.spotify.com/v1';
+
+// ==== LOGIN URL ====
 export const loginUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&redirect_uri=${encodeURIComponent(
   REDIRECT_URI
 )}&scope=${encodeURIComponent(SCOPES)}`;
 
-// Function to get token from localStorage
-const getAccessToken = () => localStorage.getItem('spotify_token');
-const getRefreshToken = () => localStorage.getItem('refresh_token');
-
-// Attach token dynamically to requests
-api.interceptors.request.use((config) => {
-  const token = getAccessToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
-
-// **Interceptor to Handle 401 & Refresh Token**
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      console.warn('Access token expired. Refreshing...');
-
-      const newToken = await refreshAccessToken();
-      console.log(newToken, 'Refresh');
-      if (newToken) {
-        error.config.headers.Authorization = `Bearer ${newToken}`;
-        return axios(error.config); // Retry the original request
-      }
-    }
-    return Promise.reject(error);
-  }
-);
-
-// **Function to Refresh Access Token**
-const refreshAccessToken = async () => {
-  try {
-    const refreshToken = getRefreshToken();
-    if (!refreshToken) {
-      console.error('No refresh token available.');
-      return null;
-    }
-
-    const response = await fetch(REFRESH_TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken,
-        client_id: CLIENT_ID,
-      }),
-    });
-
-    const data = await response.json();
-    console.log('refresh data', data);
-    if (data.access_token) {
-      localStorage.setItem('spotify_token', data.access_token);
-      return data.access_token;
-    } else {
-      console.error('Failed to refresh token:', data);
-      return null;
-    }
-  } catch (err) {
-    console.error('Error refreshing access token:', err);
-    return null;
-  }
-};
-
+// ==== TOKEN HELPERS ====
 export const setAccessToken = () => {
   const hash = window.location.hash;
   const params = new URLSearchParams(hash.substring(1));
   const accessToken = params.get('access_token');
-  const spotify_token = localStorage.getItem('spotify_token');
-  if (accessToken) return true;
+  const expiresIn = params.get('expires_in');
 
-  if (accessToken && !spotify_token) {
+  if (accessToken) {
+    const expiryTime = Date.now() + Number(expiresIn) * 1000;
     localStorage.setItem('spotify_token', accessToken);
+    localStorage.setItem('token_expiry', expiryTime.toString());
+    window.location.hash = '';
     return true;
+  }
+
+  // If user visited the page directly and no token is present, redirect to your custom login page
+  if (!getAccessToken()) {
+    window.location.href = '/'; // your login page
   }
 
   return false;
 };
+
+export const isTokenExpired = () => {
+  const expiry = Number(localStorage.getItem('token_expiry') || 0);
+  return Date.now() > expiry;
+};
+
+const getTokenFromUrl = () => {
+  const hash = window.location.hash;
+  if (!hash) return null;
+
+  const params = new URLSearchParams(hash.substring(1)); // remove "#"
+  const token = params.get('access_token');
+
+  if (token) {
+    localStorage.setItem('spotify_token', token);
+    localStorage.setItem('token_expiry', Date.now() + 3600 * 1000); // 1 hour
+    // Clean the URL
+    window.history.replaceState({}, document.title, '/');
+    return token;
+  }
+
+  return null;
+};
+
+export const getAccessToken = () => {
+  const token = localStorage.getItem('spotify_token');
+  const expiry = localStorage.getItem('token_expiry');
+
+  if (!token || !expiry || Date.now() > parseInt(expiry, 10)) {
+    return getTokenFromUrl(); // Only try extracting from URL on first load
+  }
+
+  return token;
+};
+
+export const logout = () => {
+  localStorage.removeItem('spotify_token');
+  localStorage.removeItem('token_expiry');
+  setTimeout(() => {
+    window.location.href = '/'; // goes to login page
+  }, 100);
+};
+
+// ==== AXIOS INSTANCE ====
+const api = axios.create({
+  baseURL: BASE_URL,
+});
+
+api.interceptors.request.use((config) => {
+  if (isTokenExpired()) {
+    console.warn('Access token expired. Redirecting to login...');
+    window.location.href = loginUrl;
+    return Promise.reject('Access token expired');
+  }
+
+  const token = getAccessToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
 
 export default api;

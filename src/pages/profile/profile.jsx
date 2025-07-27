@@ -8,6 +8,7 @@ import {
 import TopArtist from '../../components/topArtist/topArtist';
 import TopTrack from '../../components/topTrack/topTrack';
 import GraphLoader from '../../components/common/loader/loader';
+import { logout } from '../../services/authentication';
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -62,7 +63,9 @@ const Profile = () => {
             <div className={styles.text}>playlists</div>
           </div>
         </div>
-        <div className={styles.logout}>logout</div>
+        <div className={styles.logout} onClick={() => logout()}>
+          logout
+        </div>
       </div>
       <div className={styles.subContainer}>
         <TopArtist />
