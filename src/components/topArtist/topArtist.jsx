@@ -24,10 +24,14 @@ const TopArtist = () => {
             return (
               <li className={styles.artists}>
                 {/* <a href='/' className={styles.artistImg}> */}
-                <img src={item?.images?.[0]?.url} alt='artist' />
+                <div className={styles.artistImg}>
+                  <img src={item?.images?.[0]?.url} alt='artist' />
+                </div>
                 {/* </a> */}
-                {/* <a href='/' className={styles.artistName}> */}
-                {item?.name}
+                <div className={styles.artistName}>
+                  {/* <a href='/' className={styles.artistName}> */}
+                  {item?.name}
+                </div>
                 {/* </a> */}
               </li>
             );
