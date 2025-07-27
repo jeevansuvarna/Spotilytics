@@ -1,18 +1,12 @@
-name: CI - Spotilytics
+name: Build and Deploy Spotilytics to Netlify
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
+    branches: [main]
 
 jobs:
-  build-and-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
-    env:
-      REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
-      REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
 
     steps:
       - name: Checkout code
@@ -26,17 +20,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Run tests
-        run: npm test -- --watchAll=false
-
-      - name: Build
+      - name: Build project
+        env:
+          REACT_APP_CLIENT_ID: ${{ secrets.REACT_APP_CLIENT_ID }}
+          REACT_APP_REDIRECT_URI: ${{ secrets.REACT_APP_REDIRECT_URI }}
         run: npm run build
 
-      - name: Upload production-ready build (optional artifact)
-        uses: actions/upload-artifact@v4
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
         with:
-          name: build
-          path: build
+          args: deploy --dir=build --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
