@@ -4,7 +4,6 @@ import {
   getRecommendations,
 } from '../../services/spotify-service';
 import styles from './recommendation.module.css';
-import ListComponent from '../../components/common/list-component/list-component';
 import { useParams } from 'react-router-dom';
 
 const Recommendations = () => {
@@ -22,7 +21,7 @@ const Recommendations = () => {
         console.log(res, 'rec');
       });
     });
-  }, []);
+  }, [playlistId]);
 
   return (
     <div className={styles.mainContainer}>

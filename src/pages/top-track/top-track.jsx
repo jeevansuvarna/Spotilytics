@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTopArtist, fetchTopTrack } from '../../services/spotify-service';
+import { fetchTopTrack } from '../../services/spotify-service';
 import styles from './top-track.module.css';
 import ListComponent from '../../components/common/list-component/list-component';
 import GraphLoader from '../../components/common/loader/loader';
@@ -35,7 +35,7 @@ const TopTrack = () => {
             className={styles.filterButton}
             onClick={() => fetchTopTrackList('long_term')}
           >
-            <div className={active == 'long_term' && styles.active}>
+            <div className={active === 'long_term' && styles.active}>
               All Time
             </div>
           </button>
@@ -43,7 +43,7 @@ const TopTrack = () => {
             className={styles.filterButton}
             onClick={() => fetchTopTrackList('medium_term')}
           >
-            <div className={active == 'medium_term' && styles.active}>
+            <div className={active === 'medium_term' && styles.active}>
               Last 6 Months
             </div>
           </button>
@@ -51,7 +51,7 @@ const TopTrack = () => {
             className={styles.filterButton}
             onClick={() => fetchTopTrackList('short_term')}
           >
-            <div className={active == 'short_term' && styles.active}>
+            <div className={active === 'short_term' && styles.active}>
               Last 4 Weeks
             </div>
           </button>

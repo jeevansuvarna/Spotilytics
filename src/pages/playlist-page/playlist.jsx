@@ -4,7 +4,7 @@ import {
   fetchAudioFeature,
   fetchCurrentPaylist,
 } from '../../services/spotify-service';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ListComponent from '../../components/common/list-component/list-component';
 import GraphLoader from '../../components/common/loader/loader';
 
@@ -23,7 +23,7 @@ const PlaylistPage = () => {
         setIsLoading(false);
       });
     fetchAudioFeature(playlistId).then((res) => {});
-  }, []);
+  }, [playlistId]);
 
   const imageUrl =
     playlistDetail?.images?.[1]?.url || playlistDetail?.images?.[0]?.url || '';
@@ -40,6 +40,7 @@ const PlaylistPage = () => {
         <a
           href={playlistDetail?.owner?.href}
           target='_blank'
+          rel='noreferrer'
           className={styles.playlistOwner}
         >
           By {playlistDetail?.owner?.display_name}
@@ -47,14 +48,18 @@ const PlaylistPage = () => {
         <div className={styles.playlistOwner}>
           Followers: {playlistDetail?.followers?.total}
         </div>
-        {playlistDetail?.description != 'null' ? (
+        {playlistDetail?.description !== 'null' ? (
           <div className={styles.description}>
             {playlistDetail?.description}
           </div>
         ) : (
           <></>
         )}
-        <a href={playlistDetail?.external_urls?.spotify} target='_blank'>
+        <a
+          href={playlistDetail?.external_urls?.spotify}
+          target='_blank'
+          rel='noreferrer'
+        >
           <div className={`${styles.playbtn} spotify-button`}>
             Open On Spotify
           </div>

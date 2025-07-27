@@ -11,12 +11,12 @@ const ListComponent = ({ lists, limit = 10 }) => {
         item?.artists?.forEach((element) => {
           artistList.push(element?.name);
         });
-        if (!item?.album?.images?.[0]?.url) return;
+        if (!item?.album?.images?.[0]?.url) return null;
         return (
           <Link to={`/track/${item.id}`}>
             <div className={styles.trackItem}>
               <div className={styles.trackImg}>
-                <img src={item?.album?.images?.[0]?.url} />
+                <img src={item?.album?.images?.[0]?.url} alt='album' />
               </div>
               <div className={styles.trackInfo}>
                 <div className={styles.trackDetails}>

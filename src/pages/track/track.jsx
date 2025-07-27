@@ -19,7 +19,7 @@ const Track = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [trackId]);
 
   const artist = useMemo(() => {
     let artistList = [];
@@ -45,6 +45,7 @@ const Track = () => {
           <a
             href={trackDetail?.external_urls?.spotify}
             target='_blank'
+            rel='noreferrer'
             className={`${styles.playbtn} spotify-button`}
           >
             PLAY ON SPOTIFY

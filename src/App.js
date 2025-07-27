@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import Login from './pages/login/login';
 import { Route, Routes } from 'react-router-dom';
-import useHooks from './hooks/userHooks';
 import Dashboard from './pages/dashboard/dashboard';
 import api, {
   getAccessToken,
-  loginUrl,
   logout,
   setAccessToken,
 } from './services/authentication';

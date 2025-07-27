@@ -33,7 +33,7 @@ const TopArtist = () => {
             className={styles.filterButton}
             onClick={() => fetchTopArtistList('long_term')}
           >
-            <div className={active == 'long_term' && styles.active}>
+            <div className={active === 'long_term' && styles.active}>
               All Time
             </div>
           </button>
@@ -41,7 +41,7 @@ const TopArtist = () => {
             className={styles.filterButton}
             onClick={() => fetchTopArtistList('medium_term')}
           >
-            <div className={active == 'medium_term' && styles.active}>
+            <div className={active === 'medium_term' && styles.active}>
               Last 6 Months
             </div>
           </button>
@@ -49,7 +49,7 @@ const TopArtist = () => {
             className={styles.filterButton}
             onClick={() => fetchTopArtistList('short_term')}
           >
-            <div className={active == 'short_term' && styles.active}>
+            <div className={active === 'short_term' && styles.active}>
               Last 4 Weeks
             </div>
           </button>
@@ -64,6 +64,7 @@ const TopArtist = () => {
                 href={item?.external_urls?.spotify}
                 className={styles.artistName}
                 target='_blank'
+                rel='noreferrer'
               >
                 {item?.name}
               </a>

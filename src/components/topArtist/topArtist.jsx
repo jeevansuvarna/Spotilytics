@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './topArtist.module.css';
 import { fetchTopArtist } from '../../services/spotify-service';
+import { Link } from 'react-router-dom';
 
 const TopArtist = () => {
   const [topArtist, setTopArtist] = useState([]);
@@ -13,21 +14,21 @@ const TopArtist = () => {
     <div className={styles.trackList}>
       <div className={styles.trackHeading}>
         <h3>Top Artists of All Time</h3>
-        <a href='' className={styles.seeMore}>
+        <Link to='/top-artist' className={styles.seeMore}>
           see more
-        </a>
+        </Link>
       </div>
       <div>
         <ul>
           {topArtist?.slice(0, 10).map((item) => {
             return (
               <li className={styles.artists}>
-                <a href='' className={styles.artistImg}>
-                  <img src={item?.images?.[0]?.url} />
-                </a>
-                <a href='' className={styles.artistName}>
-                  {item?.name}
-                </a>
+                {/* <a href='/' className={styles.artistImg}> */}
+                <img src={item?.images?.[0]?.url} alt='artist' />
+                {/* </a> */}
+                {/* <a href='/' className={styles.artistName}> */}
+                {item?.name}
+                {/* </a> */}
               </li>
             );
           })}
