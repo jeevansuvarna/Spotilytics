@@ -9,6 +9,7 @@ import {
   TopArtist,
   TopTrack,
 } from '../icons/icons';
+import portfolio from '../../assests/images/portfolio.png';
 
 const SideNav = () => {
   const { pathname } = useLocation();
@@ -23,65 +24,79 @@ const SideNav = () => {
   }, [pathname]);
 
   return (
-    <nav className={styles.navContainer}>
-      <div className={styles.logoImg}>
-        <Link to=''>
-          <Spotify />
-        </Link>
-      </div>
-      <ul className={styles.navList}>
-        <li className={styles.iconList}>
-          <Link to='/' className={active === 'profile' && styles.active}>
-            <div className={styles.navLogo}>
-              <Account color={active === 'profile' ? '#fff' : '#9b9b9b'} />
-            </div>
-            <p>Profile</p>
+    <div className={styles.navContainer}>
+      <nav>
+        <div className={styles.logoImg}>
+          <Link to=''>
+            <Spotify />
           </Link>
-        </li>
-        <li className={styles.iconList}>
-          <Link
-            to='/top-artist'
-            className={active === 'topArtist' && styles.active}
-          >
-            <div className={styles.navLogo}>
-              <TopArtist color={active === 'topArtist' ? '#FFF' : '#9b9b9b'} />
-            </div>
-            <p>Top Artist</p>
-          </Link>
-        </li>
-        <li className={styles.iconList}>
-          <Link
-            to='/top-track'
-            className={active === 'topTrack' && styles.active}
-          >
-            <div className={styles.navLogo}>
-              <TopTrack color={active === 'topTrack' ? '#FFF' : '#9b9b9b'} />
-            </div>
+        </div>
+        <ul className={styles.navList}>
+          <li className={styles.iconList}>
+            <Link to='/' className={active === 'profile' && styles.active}>
+              <div className={styles.navLogo}>
+                <Account color={active === 'profile' ? '#fff' : '#9b9b9b'} />
+              </div>
+              <p>Profile</p>
+            </Link>
+          </li>
+          <li className={styles.iconList}>
+            <Link
+              to='/top-artist'
+              className={active === 'topArtist' && styles.active}
+            >
+              <div className={styles.navLogo}>
+                <TopArtist
+                  color={active === 'topArtist' ? '#FFF' : '#9b9b9b'}
+                />
+              </div>
+              <p>Top Artist</p>
+            </Link>
+          </li>
+          <li className={styles.iconList}>
+            <Link
+              to='/top-track'
+              className={active === 'topTrack' && styles.active}
+            >
+              <div className={styles.navLogo}>
+                <TopTrack color={active === 'topTrack' ? '#FFF' : '#9b9b9b'} />
+              </div>
 
-            <p>Top Tracks</p>
-          </Link>
-        </li>
-        <li className={styles.iconList}>
-          <Link to='/recent' className={active === 'recent' && styles.active}>
-            <div className={styles.navLogo}>
-              <Recent color={active === 'recent' ? '#FFF' : '#9b9b9b'} />
-            </div>
+              <p>Top Tracks</p>
+            </Link>
+          </li>
+          <li className={styles.iconList}>
+            <Link to='/recent' className={active === 'recent' && styles.active}>
+              <div className={styles.navLogo}>
+                <Recent color={active === 'recent' ? '#FFF' : '#9b9b9b'} />
+              </div>
 
-            <p>Recents</p>
-          </Link>
-        </li>
-        <li className={styles.iconList}>
-          <Link to='/paylist' className={active === 'paylist' && styles.active}>
-            <div className={styles.navLogo}>
-              <Playlist color={active === 'paylist' ? '#FFF' : '#9b9b9b'} />
-            </div>
+              <p>Recents</p>
+            </Link>
+          </li>
+          <li className={styles.iconList}>
+            <Link
+              to='/paylist'
+              className={active === 'paylist' && styles.active}
+            >
+              <div className={styles.navLogo}>
+                <Playlist color={active === 'paylist' ? '#FFF' : '#9b9b9b'} />
+              </div>
 
-            <p>Paylist</p>
-          </Link>
-        </li>
-      </ul>
-      <div></div>
-    </nav>
+              <p>Paylist</p>
+            </Link>
+          </li>
+        </ul>
+        <div></div>
+      </nav>
+      <a
+        href='https://jeevan-suvarna.netlify.app/'
+        target='_blank'
+        rel='noreferrer'
+      >
+        <img src={portfolio} alt='portfolio' />
+      </a>
+    </div>
   );
 };
 
