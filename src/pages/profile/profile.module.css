@@ -22,12 +22,26 @@
   height: 150px;
   border-radius: 100%;
   overflow: hidden;
+  position: relative;
+  box-shadow: 0 0 30px rgba(29, 185, 84, 0.4), 0 0 60px rgba(29, 185, 84, 0.2);
+  border: 3px solid rgba(29, 185, 84, 0.6);
+  transition: all 0.3s ease;
 
   img {
     height: 100%;
     max-width: 100%;
     vertical-align: middle;
+    transition: transform 0.3s ease;
   }
+}
+
+.userImg:hover {
+  box-shadow: 0 0 40px rgba(29, 185, 84, 0.6), 0 0 80px rgba(29, 185, 84, 0.3);
+  border-color: rgba(29, 185, 84, 0.9);
+}
+
+.userImg:hover img {
+  transform: scale(1.05);
 }
 
 .userName {
@@ -45,42 +59,63 @@
 .userStats {
   text-transform: uppercase;
   display: flex;
-  gap: 30px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 28px;
   text-align: center;
+}
 
-  .count {
-    color: rgb(29, 185, 84);
-    font-weight: 700;
-    font-size: 20px;
-  }
+.stats {
+  background: linear-gradient(145deg, rgba(40, 40, 40, 0.6), rgba(20, 20, 20, 0.8));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 28px;
+  min-width: 100px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
 
-  .text {
-    color: rgb(155, 155, 155);
-    font-size: 12px;
-    letter-spacing: 1px;
-    margin-top: 5px;
-  }
+.stats:hover {
+  transform: translateY(-4px);
+  border-color: rgba(29, 185, 84, 0.4);
+  box-shadow: 0 8px 25px rgba(29, 185, 84, 0.15);
+}
+
+.count {
+  color: rgb(29, 185, 84);
+  font-weight: 700;
+  font-size: 24px;
+  text-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+}
+
+.text {
+  color: rgb(155, 155, 155);
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  font-weight: 500;
 }
 
 .logout {
   background-color: transparent;
   color: rgb(255, 255, 255);
-  border: 1px solid rgb(255, 255, 255);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 30px;
-  margin-top: 30px;
-  padding: 12px 30px;
+  margin-top: 35px;
+  padding: 12px 32px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   text-align: center;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .logout:hover {
   color: black;
   background-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
 }
 
 .subContainer {

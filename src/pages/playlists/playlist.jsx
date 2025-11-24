@@ -27,11 +27,18 @@ const Playlist = () => {
         <h2>Your Playlist</h2>
       </div>
       <div className={styles.playlistList}>
-        {playlist?.items?.map((item) => {
+        {playlist?.items?.map((item, index) => {
           return (
-            <Link to={`/playlist/${item.id}`}>
+            <Link to={`/playlist/${item.id}`} key={item?.id || index}>
               <div className={styles.playlistItems}>
-                <img src={item?.images?.[0]?.url} alt='' />
+                <div className={styles.imageWrapper}>
+                  <img src={item?.images?.[0]?.url} alt={item?.name} />
+                  <div className={styles.playIcon}>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z"/>
+                    </svg>
+                  </div>
+                </div>
                 <div className={styles.playlistName}>{item?.name}</div>
                 <div className={styles.tracks}>
                   {item?.tracks?.total} Tracks

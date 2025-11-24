@@ -2,9 +2,9 @@ import React from 'react';
 import styles from './list-component.module.css';
 import { Link } from 'react-router-dom';
 
-const ListComponent = ({ lists, limit = 10 }) => {
+const ListComponent = ({ lists, limit = 10, showRank = true }) => {
   return (
-    <>
+    <div className={styles.trackList}>
       {lists?.slice(0, limit)?.map((item, index) => {
         let artistList = [];
         item = item?.track || item;
@@ -13,8 +13,11 @@ const ListComponent = ({ lists, limit = 10 }) => {
         });
         if (!item?.album?.images?.[0]?.url) return null;
         return (
-          <Link to={`/track/${item.id}`}>
+          <Link to={`/track/${item.id}`} key={item.id || index}>
             <div className={styles.trackItem}>
+              {showRank && (
+                <div className={styles.rankNumber}>{index + 1}</div>
+              )}
               <div className={styles.trackImg}>
                 <img src={item?.album?.images?.[0]?.url} alt='album' />
               </div>
@@ -22,19 +25,14 @@ const ListComponent = ({ lists, limit = 10 }) => {
                 <div className={styles.trackDetails}>
                   <div className={styles.trackName}>{item?.name}</div>
                   <div className={styles.trackArtist}>
-                    <span>{artistList?.join(',')}</span>
-                    &nbsp;&nbsp;
-                    <span>.</span>
-                    &nbsp;&nbsp;
+                    <span>{artistList?.join(', ')}</span>
+                    <span className={styles.dot}>·</span>
                     <span>{item?.album?.name}</span>
                   </div>
                 </div>
                 {item?.duration_ms > 0 && (
                   <div className={styles.trackDuration}>
-                    {(item?.duration_ms / 100000)
-                      .toFixed(2)
-                      .toString()
-                      .replaceAll('.', ':')}
+                    {Math.floor(item?.duration_ms / 60000)}:{String(Math.floor((item?.duration_ms % 60000) / 1000)).padStart(2, '0')}
                   </div>
                 )}
               </div>
@@ -42,7 +40,7 @@ const ListComponent = ({ lists, limit = 10 }) => {
           </Link>
         );
       })}
-    </>
+    </div>
   );
 };
 export default ListComponent;

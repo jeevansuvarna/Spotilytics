@@ -15,7 +15,7 @@ const TopTrack = () => {
   return (
     <div className={styles.trackContainer}>
       <div className={styles.trackHeading}>
-        <h3>Top Artists of All Time</h3>
+        <h3>Top Track of All Time</h3>
         <Link to='/top-track' className={styles.seeMore}>
           see more
         </Link>

@@ -93,8 +93,9 @@ const SideNav = () => {
         href='https://jeevan-suvarna.netlify.app/'
         target='_blank'
         rel='noreferrer'
+        className={styles.portfolioLink}
       >
-        <img src={portfolio} alt='portfolio' />
+        <img src={portfolio} alt='portfolio' className={styles.portfolioImg} />
       </a>
     </div>
   );

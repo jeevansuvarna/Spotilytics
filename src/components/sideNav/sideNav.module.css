@@ -15,7 +15,64 @@
   justify-content: space-between;
   flex: 1;
 }
-.navContainer img {
+.portfolioLink {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #1db954, #1ed760, #1db954);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.portfolioLink::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1db954, #1ed760, #1db954);
+  background-size: 200% 200%;
+  animation: gradientShift 3s ease infinite;
+  filter: blur(8px);
+  opacity: 0.6;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.portfolioLink:hover {
+  transform: scale(1.1);
+}
+
+.portfolioLink:hover::before {
+  filter: blur(12px);
+  opacity: 0.9;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.portfolioImg {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: block;
+  border: none !important;
+  margin: 0 !important;
+}
+
+.navContainer img:not(.portfolioImg) {
   height: 50px;
   width: 50px;
   border-radius: 50%;
@@ -25,7 +82,7 @@
   border: 1px solid white;
 }
 
-.navContainer img:hover {
+.navContainer img:not(.portfolioImg):hover {
   transform: scale(1.2);
 }
 
@@ -34,10 +91,17 @@
   width: 50px;
   display: flex;
   margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
+
+.logoImg:hover {
+  transform: scale(1.1);
 }
 
 .navContainer {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 20px;
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
@@ -49,35 +113,59 @@
   top: 0px;
   left: 0px;
   width: 100px;
-  background-color: rgb(4, 3, 6);
+  background: linear-gradient(180deg, rgb(4, 3, 6) 0%, rgb(10, 10, 12) 100%);
   text-align: center;
   z-index: 99;
 }
+
 .iconList {
   color: rgb(155, 155, 155);
   font-size: 11px;
   list-style: none;
-  a {
-    display: block;
-    padding: 15px 0px;
-    border-left: 5px solid transparent;
-    width: 100%;
-    height: 100%;
-    text-decoration: none;
-  }
-  .active {
-    color: rgb(255, 255, 255);
-    background-color: rgb(24, 24, 24);
-    border-left: 5px solid rgb(30, 215, 96);
-    p {
-      color: white !important;
-    }
-  }
-  p {
-    text-decoration: none;
-    color: #9b9b9b;
-    margin: 0px;
-  }
+  position: relative;
+}
+
+.iconList a {
+  display: block;
+  padding: 18px 0px;
+  border-left: 3px solid transparent;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.iconList a:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.iconList a:hover p {
+  color: #fff;
+}
+
+.iconList .active {
+  color: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(29, 185, 84, 0.15), transparent);
+  border-left: 3px solid rgb(30, 215, 96);
+}
+
+.iconList .active p {
+  color: white !important;
+}
+
+.iconList .active .navLogo {
+  filter: drop-shadow(0 0 6px rgba(29, 185, 84, 0.5));
+}
+
+.iconList p {
+  text-decoration: none;
+  color: #9b9b9b;
+  margin: 0px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  transition: color 0.3s ease;
 }
 
 .navList {
@@ -86,12 +174,19 @@
   padding: 0;
   width: 100%;
   margin: 0;
+  gap: 4px;
 }
+
 .navLogo {
-  height: 17px;
-  width: 17px;
+  height: 20px;
+  width: 20px;
   margin: auto;
-  margin-bottom: 7px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.iconList a:hover .navLogo {
+  transform: scale(1.15);
 }
 
 @media (max-width: 48em) {
@@ -103,20 +198,31 @@
     min-height: 70px;
     height: 70px;
     flex-direction: row;
+    background: linear-gradient(0deg, rgb(4, 3, 6) 0%, rgb(10, 10, 12) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
+
+  .portfolioLink {
+    display: none;
+  }
+
   .navContainer img:hover {
     transform: none;
   }
+
   .logoImg {
     display: none;
   }
+
   .navList {
     flex-direction: row;
     align-items: flex-end;
     -webkit-box-pack: center;
     justify-content: center;
     height: 100%;
+    gap: 0;
   }
+
   .iconList {
     flex-direction: row;
     align-items: flex-end;
@@ -125,14 +231,8 @@
     display: flex;
     width: 100%;
     height: 100%;
-    a {
-      gap: 6px;
-    }
-    .active {
-      border-top: 5px solid rgb(30, 215, 96);
-      border-left: unset;
-    }
   }
+
   .iconList a {
     display: flex;
     -webkit-box-pack: center;
@@ -140,11 +240,33 @@
     -webkit-box-align: center;
     align-items: center;
     flex-direction: column;
-    padding: 0px;
+    padding: 10px 0px;
     border-left: 0px;
     border-top: 3px solid transparent;
+    gap: 4px;
   }
+
+  .iconList a:hover {
+    background: transparent;
+  }
+
+  .iconList .active {
+    border-top: 3px solid rgb(30, 215, 96);
+    border-left: unset;
+    background: linear-gradient(0deg, rgba(29, 185, 84, 0.15), transparent);
+  }
+
   .navLogo {
     margin: 0;
+    height: 18px;
+    width: 18px;
+  }
+
+  .iconList p {
+    font-size: 9px;
+  }
+
+  .iconList a:hover .navLogo {
+    transform: none;
   }
 }

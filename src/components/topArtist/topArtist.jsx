@@ -20,19 +20,16 @@ const TopArtist = () => {
       </div>
       <div>
         <ul>
-          {topArtist?.slice(0, 10).map((item) => {
+          {topArtist?.slice(0, 10).map((item, index) => {
             return (
-              <li className={styles.artists}>
-                {/* <a href='/' className={styles.artistImg}> */}
+              <li className={styles.artists} key={item?.id || index}>
+                <div className={styles.rankNumber}>{index + 1}</div>
                 <div className={styles.artistImg}>
                   <img src={item?.images?.[0]?.url} alt='artist' />
                 </div>
-                {/* </a> */}
                 <div className={styles.artistName}>
-                  {/* <a href='/' className={styles.artistName}> */}
                   {item?.name}
                 </div>
-                {/* </a> */}
               </li>
             );
           })}

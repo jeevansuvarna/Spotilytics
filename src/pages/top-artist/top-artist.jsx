@@ -56,10 +56,17 @@ const TopArtist = () => {
         </div>
       </div>
       <div className={styles.topArtistList}>
-        {topArtist?.items?.map((item) => {
+        {topArtist?.items?.map((item, index) => {
           return (
-            <div className={styles.topArtistItem}>
-              <img src={item?.images?.[0]?.url} alt='' />
+            <div className={styles.topArtistItem} key={item?.id || index}>
+              <div className={styles.imageWrapper}>
+                {/* <div className={styles.rankBadge}>{index + 1}</div> */}
+                <img src={item?.images?.[0]?.url} alt={item?.name} />
+                <div className={styles.overlay}>
+                  <div className={styles.popTitle}>Popularity</div>
+                  <div className={styles.popularity}>{item?.popularity}%</div>
+                </div>
+              </div>
               <a
                 href={item?.external_urls?.spotify}
                 className={styles.artistName}
@@ -68,8 +75,6 @@ const TopArtist = () => {
               >
                 {item?.name}
               </a>
-              <div className={styles.popTitle}>Popularity</div>
-              <div className={styles.popularity}>{item?.popularity} %</div>
             </div>
           );
         })}
